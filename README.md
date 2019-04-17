@@ -9,6 +9,4 @@ npm install
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
 https://www.markdownguide.org/cheat-sheet
