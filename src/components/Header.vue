@@ -6,7 +6,7 @@
             <b-button v-if="showNewBtn" size="sm" class="m-0" @click="NewNoteUrl()">+ New</b-button>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
-            <b-form-input @change="searchChanged" v-if="showNewBtn" size="sm" class="m-0" placeholder="Search"></b-form-input>
+            <b-form-input v-if="showNewBtn" size="sm" class="m-0" placeholder="Search"></b-form-input>
         </b-navbar-nav>
     </b-navbar>
     </div>

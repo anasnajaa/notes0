@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header :searchChanged="searchChanged" />
+    <Header />
     <router-view />
   </div>
 </template>
@@ -12,9 +12,6 @@ export default {
     Header
   },
   methods: {
-    searchChanged: function(val){
-      console.log(val);
-    }
   }
 }
 </script>
