@@ -21,8 +21,6 @@ export default {
   },
   data: function(){
     return {
-      notes: [],
-      isLoading: 1
     };
   },
   props: {
@@ -30,11 +28,11 @@ export default {
   },
   created: function() {},
   mounted: function() {
-    if(localStorage.getItem('notes') === null){
-      localStorage.setItem('notes', JSON.stringify([]));
+  },
+  computed: {
+    notes() {
+        return this.$store.state.notes.notes;
     }
-    this.notes = JSON.parse(localStorage.getItem('notes'));
-    this.isLoading = 0;
   },
   updated: function() {},
   destroyed: function() {}
