@@ -6,7 +6,7 @@
             <b-button v-if="showNewBtn" size="sm" class="m-0" @click="NewNoteUrl()">+ New</b-button>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
-            <b-form-input v-if="showNewBtn" size="sm" class="m-0" placeholder="Search"></b-form-input>
+            <b-form-input @keyup.enter="search" v-model="searchTerm" v-if="showNewBtn" size="sm" class="m-0" placeholder="Search"></b-form-input>
         </b-navbar-nav>
     </b-navbar>
     </div>
@@ -22,6 +22,9 @@ export default {
     methods: {
         NewNoteUrl: function() {
             this.$router.push({name: 'noteDetails', params: { id: uuid.v1() }});
+        },
+        search: function(){
+            this.$router.push({name: 'notesBySearchText', params: { searchText: this.searchTerm }});
         }
     },
     computed: {
@@ -29,12 +32,14 @@ export default {
     data: function(){
         return {
             showNewBtn: true,
-            title: 'Notes'
+            title: 'Notes',
+            searchTerm: ''
         };
     },
     watch: {
         $route: function(to) {
             if(to.name === "home"){
+                this.searchTerm = '';
                 this.showNewBtn = true;
             } else if(to.name === "noteDetails") {
                 this.showNewBtn = false;
