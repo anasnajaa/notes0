@@ -7,9 +7,9 @@ npm install
 
 ### Compiles and hot-reloads for development
 ```
-npm run serve
+npm run start
 ```
-
+### Markdown guide
 https://www.markdownguide.org/cheat-sheet
 
 
