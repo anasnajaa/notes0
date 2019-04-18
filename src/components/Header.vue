@@ -24,7 +24,7 @@ export default {
             this.$router.push({name: 'noteDetails', params: { id: uuid.v1() }});
         },
         search: function(){
-            this.$router.push({name: 'notesBySearchText', params: { searchText: this.searchTerm }});
+            this.$router.push({name: 'notesBySearchText', query: { searchText: this.searchTerm, page: 1 }});
         }
     },
     computed: {
@@ -43,6 +43,9 @@ export default {
                 this.showNewBtn = true;
             } else if(to.name === "noteDetails") {
                 this.showNewBtn = false;
+            } else if (to.name === "notesBySearchText"){
+                this.showNewBtn = true;
+                this.searchTerm = to.query.searchText;
             }
         }
   }

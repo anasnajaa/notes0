@@ -56,17 +56,16 @@ export default {
       if(this.notes.length > 0){
         return Math.ceil(this.notes.length / this.notesPerPage) || 1;
       }
-      return 1
+      return 1;
     }
   },
-  destroyed: function() {},
-    watch: {
-      $route: function(to) {
-          if(to.name === "home"){
-            this.filterByPage();
-          }
-      }
-  }
+  watch: {
+    $route: function(to) {
+        if(to.name === "home"){
+          this.filterByPage();
+        }
+    }
+  },
 }
 </script>
 

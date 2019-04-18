@@ -24,7 +24,7 @@ export default new Router({
       component: () => import( './views/NotesByTag.vue')
     },
     {
-      path: '/search/:searchText',
+      path: '/search',
       name: 'notesBySearchText',
       component: () => import( './views/NotesBySearchText.vue')
     }

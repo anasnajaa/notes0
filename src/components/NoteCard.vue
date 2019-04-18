@@ -33,10 +33,15 @@ export default {
         this.$router.push({ name: "notesByTag", params: { name: tagName } });
     },
     parsedNoteContent: function() {
-      return markDown(this.note.content);
+      return markDown(this.truncate(this.note.content, 70));
+    },
+    truncate: function (value, limit) {
+        if (value.length > limit) {
+            value = value.substring(0, (limit - 3)) + '...';
+        }
+        return value;
     }
-  },
-  mounted: function() {}
+  }
 };
 </script>
 
