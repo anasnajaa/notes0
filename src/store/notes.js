@@ -1,40 +1,6 @@
 export default {
     state: {
-        notes: localStorage.getItem('notes') === null ? [
-            {
-                id: 1,
-                title: 'Temporary Note ',
-                content: 
-`This note is loaded once on first visit.
-Work Projects Sample
-========================
-
-- [E-School and Website Documentation](https://alruya-my.sharepoint.com/:w:/g/personal/anasmo_alruya_edu_kw/ESMXMfzgj8JGlIuUFv5eYBsB_RIUl7VRCXSmH0s7TuCnvA?e=8jGq5A) will expire in two days.
-- [RBS Website](https://www.alruya.edu.kw/)
-- [RBS E-School - Website](https://www.alruya.edu.kw/eschool)
-- [RBS E-School - App](https://play.google.com/store/apps/details?id=net.alruyaschool.eschool.alruyae_school)
-- [RBS ERP - App](https://play.google.com/store/apps/details?id=net.alruyaschool.eschool.rbs_erp)
-- [PAAET Announcements](https://pay.paaet.edu.kw/cbe/cal/)
-
-Other Resources
--------------------
-
-- **Github:**  https://github.com/hecked12
-
-- **Notes0:**  https://notes0.herokuapp.com/#/
-- **Quiz0:**  https://quiz0.herokuapp.com/
-- **Hecked:**  https://hecked.herokuapp.com/
-
-Social
--------------
-
-- Twitter: [@spidernet12](https://twitter.com/spidernet12)
-- LinkdIn: [Anas Najaa](https://www.linkedin.com/in/anasnajaa)`,
-                tags: [{text:'default'}],
-                dateCreated: '20190417T185300',
-                dateModefied: null
-            }
-        ] : JSON.parse(localStorage.getItem('notes'))
+        notes: localStorage.getItem('notes') === null ? [] : JSON.parse(localStorage.getItem('notes'))
     },
     getters: {
         getNoteById: (state) => (id) =>{
