@@ -1,12 +1,12 @@
 # notes0
 
 ## Project setup
-```
+```bash
 npm install
 ```
 
 ### Compiles and hot-reloads for development
-```
+```bash
 npm run start
 ```
 ### Markdown guide
@@ -15,7 +15,7 @@ https://www.markdownguide.org/cheat-sheet
 
 Populate with data for testing:
 
-```
+```javascript
 localStorage.setItem('notes', JSON.stringify([]));
 let u = [];
 for(let i = 0; i < 10000; i++) {
