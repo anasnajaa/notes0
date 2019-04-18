@@ -5,6 +5,7 @@ import UUID from 'vue-uuid';
 import router from './router';
 import store from './store';
 import vueMoment from 'vue-moment';
+import './registerServiceWorker'
 
 import '../custom.scss'
 
