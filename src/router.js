@@ -17,6 +17,16 @@ export default new Router({
       path: '/notes/:id',
       name: 'noteDetails',
       component: () => import( './views/NoteDetails.vue')
+    },
+    {
+      path: '/tags/:name',
+      name: 'notesByTag',
+      component: () => import( './views/NotesByTag.vue')
+    },
+    {
+      path: '/search/:searchText',
+      name: 'notesBySearchText',
+      component: () => import( './views/NotesBySearchText.vue')
     }
   ]
 })
