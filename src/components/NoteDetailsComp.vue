@@ -1,27 +1,22 @@
 <template>
   <div v-if="isLoading === 0">
-    <b-container v-if="!viewMode" class="mb-5 header-margin">
+    <b-container v-if="!viewMode" class="bottom-nav-margin header-margin">
       <b-form-input class="mb-2" placeholder="Title" v-model="note.title" type="text"></b-form-input>
-      <b-form-input
-        class="mb-2"
-        placeholder="Tags (Comma delimited)"
-        v-model="noteTagsArrayToString"
-        type="text"
-      ></b-form-input>
+      <vue-tags-input
+        v-model="tag"
+        :tags="note.tags"
+        class="mb-2" 
+        :allow-edit-tags="true"
+        @tags-changed="newTags => note.tags = newTags"/>
       <b-form-textarea v-model="note.content" placeholder="Content" rows="10" max-rows="100"></b-form-textarea>
     </b-container>
-    <b-container v-else class="mb-5 header-margin">
-      <h1>{{note.title}}</h1>
-      <div v-if="note.tags.length > 0">
-          <b-badge class="mr-1" pill :key="tag" v-for="tag in note.tags" variant="secondary">{{ tag }}</b-badge>
-      </div>
-      <div v-html="parsed()"></div>
+    <b-container v-else class="bottom-nav-margin header-margin">
+      <NoteCard border="light" :truncate="false" :note="note"/>
     </b-container>
     <b-navbar fixed="bottom" type="light" variant="dark">
       <b-collapse id="nav-collapse" is-nav>
-        <span v-if="!this.newNote" class="small text-muted">{{ this.noteTime() }}</span>
-        <b-navbar-nav class="ml-auto">
-          <b-button @click="$router.go(-1)" variant="outline-light" class="mr-2">&#8676;</b-button>
+        <b-button @click="$router.go(-1)" variant="outline-light" class="mr-2">&#8676;</b-button>
+        <b-navbar-nav class="ml-auto">  
           <b-button @click="deleteNote()" variant="danger" size="sm" class="mr-2">Del</b-button>
           <b-button v-if="viewMode" @click="toggleViewMode()" size="sm" class="m-0">Edit</b-button>
           <b-button
@@ -40,9 +35,15 @@
 
 <script>
 import markDown from "marked";
+import VueTagsInput from '@johmun/vue-tags-input';
+import NoteCard from '@/components/NoteCard.vue';
 
 export default {
   name: "NoteDetailsComp",
+  components: {
+    VueTagsInput,
+    NoteCard
+  },
   data: function() {
     return {
       currentNoteId: null,
@@ -50,23 +51,16 @@ export default {
       isLoading: 1,
       newNote: true,
       saved: false,
-      viewMode: false
+      viewMode: false,
+      tag: ''
     };
   },
   methods: {
-    noteTime: function() {
-      if (this.note.dateModefied === null) {
-        return `C ${this.$moment(this.note.dateCreated).format(
-          "DD/MM/YYYY, h:mm a"
-        )}`;
-      }
-      return `M ${this.$moment(this.note.dateModefied).format(
-        "DD/MM/YYYY, h:mm a"
-      )}`;
-    },
     saveNote: function() {
+      console.log(this.note);
       if (this.newNote) {
-        this.$store.dispatch("insertNote", this.note).then(response => {
+        this.$store.dispatch("insertNote", this.note)
+        .then(response => {
           if (response) {
             this.newNote = false;
             this.viewMode = true;
@@ -74,7 +68,8 @@ export default {
         });
       } else {
         this.note.dateModefied = `${this.$moment().format("YYYYMMDDTHHmmss")}`;
-        this.$store.dispatch("updateNote", this.note).then(response => {
+        this.$store.dispatch("updateNote", this.note)
+        .then(response => {
           if (response) {
             this.viewMode = true;
           }
@@ -82,7 +77,8 @@ export default {
       }
     },
     deleteNote: function() {
-      this.$store.dispatch("deleteNote", this.currentNoteId).then(response => {
+      this.$store.dispatch("deleteNote", this.currentNoteId)
+      .then(response => {
         if (response) {
           this.$router.push({ name: "home" });
         }
@@ -101,12 +97,6 @@ export default {
   computed: {
     notes() {
       return this.$store.state.notes.notes;
-    },
-    noteTagsArrayToString: function(){
-        return this.note.tags.join(',');
-    },
-    noteTagsStringToArray: function(){
-        return this.noteTagsArrayToString.split(",");
     }
   },
   mounted: function() {
@@ -134,6 +124,9 @@ export default {
 
 <style scoped>
 .header-margin {
-  margin-top: 5rem;
+  margin-top: 4rem;
+}
+.bottom-nav-margin{
+  margin-bottom: 5rem;
 }
 </style>

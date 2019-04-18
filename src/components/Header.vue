@@ -3,10 +3,16 @@
     <b-navbar fixed="top" toggleable="lg" type="light" variant="warning">
         <b-navbar-brand to="/">{{this.title}}</b-navbar-brand>
         <b-navbar-nav>
-            <b-button v-if="showNewBtn" size="sm" class="m-0" @click="NewNoteUrl()">+ New</b-button>
+            <b-button v-if="showNewBtn" size="sm" class="m-0" @click="NewNoteUrl()"> + </b-button>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
-            <b-form-input @keyup.enter="search" v-model="searchTerm" v-if="showNewBtn" size="sm" class="m-0" placeholder="Search"></b-form-input>
+            <b-input-group v-if="showNewBtn" size="sm" class="m-0">
+                <b-form-input size="sm" @keyup.enter="search" v-model="searchTerm" placeholder="Search"></b-form-input>
+                <b-dropdown size="sm" text="by" variant="info" slot="append">
+                    <b-dropdown-item  >Title/Content</b-dropdown-item>
+                    <b-dropdown-item  >Tag</b-dropdown-item>
+                </b-dropdown>
+            </b-input-group>
         </b-navbar-nav>
     </b-navbar>
     </div>
@@ -32,7 +38,7 @@ export default {
     data: function(){
         return {
             showNewBtn: true,
-            title: 'Notes',
+            title: 'N0',
             searchTerm: ''
         };
     },

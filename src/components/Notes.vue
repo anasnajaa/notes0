@@ -1,16 +1,22 @@
 <template>
   <div>
     <b-container class="header-margin mb-5">
-      <div class="overflow-auto">
-        <b-pagination-nav limit="12" size="sm" align="fill" :link-gen="linkGen" :number-of-pages="paginationPagesCount" use-router></b-pagination-nav>
-      </div>
       <b-card-group columns v-if="this.notesFilteredByPage.length > 0">
-        <NoteCard :key="note.id" v-for="note in this.notesFilteredByPage" :note="note"/>
+        <NoteCard date="simple" :truncate="true" :key="note.id" v-for="note in this.notesFilteredByPage" :note="note"/>
       </b-card-group>
       <b-alert v-else show class="text-center" variant="light">No notes. <br/>
         Powered by <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage">localStorage</a> and 
         <a href="https://github.com/markedjs/marked">Marked</a></b-alert>
     </b-container>
+    <b-navbar fixed="bottom" type="light" variant="dark">
+      <b-collapse id="nav-collapse" is-nav>
+        <div class="overflow-auto">
+          <b-pagination-nav class="pagination-margin" limit="12" size="sm" align="fill" :link-gen="linkGen" :number-of-pages="paginationPagesCount" use-router></b-pagination-nav>
+        </div>
+        <b-navbar-nav class="ml-auto">  
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
   </div>
 </template>
 
@@ -69,8 +75,11 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style>
     .header-margin{
         margin-top: 5rem;
+    }
+    .pagination-margin ul {
+      margin-bottom: 0;
     }
 </style>
